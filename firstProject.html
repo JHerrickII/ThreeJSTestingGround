@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <title>Basic Geometry</title>
+
+    <style>
+      body{
+        margin: 0;
+        overflow: hidden;
+      }
+
+      canvas{
+        background: red;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <canvas id="myCanvas"></canvas>
+
+    <script src="js/three.js"></script>
+    <script>
+
+      var renderer,
+          scene,
+          camera,
+          myCanvas = document.getElementById('myCanvas');
+
+      //RENDERER
+      renderer = new THREE.WebGLRenderer({canvas: myCanvas, antialias:true});
+      renderer.setClearColor(0x000000);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      //CAMERA
+      camera = new THREE.PerspectiveCamera(35, window.innerWidth/window.innerHeight, 0.1, 3000);
+
+      //SCENE
+      scene = new THREE.Scene();
+
+      //LIGHTS
+      var light = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(light);
+      var light1 = new THREE.PointLight(0xffffff, 0.5);
+      scene.add(light1);
+
+
+      //var geometry = new THREE.BoxGeometry(100,100,100);
+      /*var geometry = new THREE.BufferGeometry();
+      var vertices = new Float32Array([
+        -10.0, -10.0, 0.0,
+        10.0, -10.0, 0.0,
+        10.0, 10.0, 0.0
+      ]);
+      geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
+      */
+      //var geometry = new THREE.PlaneGeometry(100,100);
+      //var geometry = new THREE.SphereGeometry(50,50,50);
+      //var geometry = new THREE.ConeGeometry(50,50,50);
+      //var geometry = new THREE.CylinderGeometry(50,50,50);
+      //var geometry = new THREE.CylinderGeometry(50,50,50, 20, 20, true);
+      /*var vertices = [
+        -1,-1,-1, -1,-1,-1, -1,-1,-1, -1,-1,-1,
+        -1,-1,-1, -1,-1,-1, -1,-1,-1, -1,-1,-1,
+      ];
+
+      var faces = [
+        2,1,0,    0,3,2
+        TOO MUCH TO TYPE
+      ];
+      var geometry = new THEEE.PolyhedronGeometry(verticies, faces, 6, 2);
+      */
+      //var geometry = new THEEE.DodecahedronGeometry(100, 0);
+      //var geometry = new THEEE.OctahedronGeometry(100, 0);
+      //draw text by loading and parsing json file provided
+
+
+      var material = new THREE.MeshLambertMaterial({color:0xf3ffe2});
+      var mesh = new THREE.Mesh(geometry, material);
+      mesh.position.set(0,0,-1000);
+
+      scene.add(mesh);
+
+      render();
+
+      function render(){
+        mesh.rotation.x += 0.01;
+        mesh.rotation.y += 0.01;
+        renderer.render(scene, camera);
+        requestAnimationFrame(render)
+      }
+
+
+
+
+    </script>
+  </body>
+</html>
